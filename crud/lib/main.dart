@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'database/db.dart';
+import 'package:crud/database/db.dart';
 
 void main() {
   runApp(MyApp());
