@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:crud/database/db.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,12 +15,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: TodoListScreen(),
+      home: const TodoListScreen(),
     );
   }
 }
 
 class TodoListScreen extends StatefulWidget {
+  const TodoListScreen({super.key});
+
   @override
   _TodoListScreenState createState() => _TodoListScreenState();
 }
@@ -26,8 +30,8 @@ class TodoListScreen extends StatefulWidget {
 class _TodoListScreenState extends State<TodoListScreen> {
   final DatabaseHelper _dbHelper = DatabaseHelper();
   List<Map<String, dynamic>> _todoList = [];
-  TextEditingController _titleController = TextEditingController();
-  TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
 
   @override
   void initState() {
@@ -57,21 +61,21 @@ class _TodoListScreenState extends State<TodoListScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text('Delete Confirmation'),
-        content: Text('Are you sure you want to delete this item?'),
+        title: const Text('Delete Confirmation'),
+        content: const Text('Are you sure you want to delete this item?'),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.of(ctx).pop(); // 다이얼로그 닫기
             },
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () {
               _deleteTodo(id);
               Navigator.of(ctx).pop(); // 다이얼로그 닫기
             },
-            child: Text('Delete'),
+            child: const Text('Delete'),
           ),
         ],
       ),
@@ -93,7 +97,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('To-Do List'),
+        title: const Text('To-Do List'),
       ),
       body: Column(
         children: [
@@ -103,15 +107,15 @@ class _TodoListScreenState extends State<TodoListScreen> {
               children: [
                 TextField(
                   controller: _titleController,
-                  decoration: InputDecoration(labelText: 'Title'),
+                  decoration: const InputDecoration(labelText: 'Title'),
                 ),
                 TextField(
                   controller: _descriptionController,
-                  decoration: InputDecoration(labelText: 'Description'),
+                  decoration: const InputDecoration(labelText: 'Description'),
                 ),
                 ElevatedButton(
                   onPressed: _addTodo,
-                  child: Text('Add To-Do'),
+                  child: const Text('Add To-Do'),
                 ),
               ],
             ),
@@ -125,7 +129,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                   title: Text(todo['title']),
                   subtitle: Text(todo['description']),
                   trailing: IconButton(
-                    icon: Icon(Icons.delete),
+                    icon: const Icon(Icons.delete),
                     color: Colors.red,
                     onPressed: () {
                       _deleteTodoConfirmation(todo['id']);
